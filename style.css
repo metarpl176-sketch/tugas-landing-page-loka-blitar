@@ -1,0 +1,285 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    list-style: none;
+}
+
+/* NAVBAR TAMPILAN DEKSTOP */
+.navbar {
+    display: flex;
+    /* isi berjajar  menyamping */
+    justify-content: space-between;
+    /*logo kiri, menu tengah/kanan, hamburger menu paling kanan */
+    align-items: center;
+    /*semua sejajar */
+    padding: 10px 5%;
+    background: #3f2204;
+    color: #fff;
+    position: sticky;
+    /*menempel di atas saat di scroll*/
+    top: 0;
+}
+/* LOGO GAMBAR+TULISAN BERDAMPINGAN */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+.logo img {
+    width: 70px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* MENU LINK BERJAJAR MENYAMPING */
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+}
+.menu a:hover {
+    border-bottom-color: #afccea;
+    color: #73d8e6;
+    /*efek saat kursor diatas link*/
+}
+/* HAMBURGER MENU DISEMBUNYIKAN DI DEKSTOP */
+.hamburger {
+    display: none;
+    /* inilah yang membuatnya hilang di desktop */
+    background: none;
+    border: 0;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+.hamburger span {
+    width: 26px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px
+}
+.isi {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+.isi:nth-child(even) {
+    background: #eef4fb
+}
+
+/* ===== TAMPILAN HP (lebar layar 768px ke bawah) ===== */
+@media (max-width:768px) {
+
+    .hamburger {
+        display: flex
+    }
+
+    /* hamburger MUNCUL di HP */
+    .menu {
+        display: none;
+        /* menu disembunyikan dulu */
+        flex-direction: column;
+        /* tersusun ke bawah */
+        gap: 0;
+        position: absolute;
+        /* melayang tepat di bawah navbar */
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background:#3f2204;
+    }
+    .menu.open {
+        display: flex
+    }
+
+    /* class "open" ditambahkan oleh JavaScript */
+    .menu a {
+        display: block;
+        padding: 15px 5%;
+        border-top: 1px solid rgba(255, 255, 255, .15)
+    }
+}
+/* TAMBAHAN 1 TOMBOL HAMBURGER/MENU BERUBAH MENJADI X SAAT DIKLIK */
+.hamburger span {
+    transition: transform .3s, opacity .3s
+}
+
+/* perubahan bentuk dibuat halus */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg)
+}
+
+/* garis 1 miring turun */
+.hamburger.active span:nth-child(2) {
+    opacity: 0
+}
+
+/* garis 2 menghilang */
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg)
+}
+
+/* garis 3 miring naik*/
+/* tambahan2 menu hp meluncur turun dengan halus */
+@media (max-width:768px) {
+    .menu {
+        display: flex;
+        /* selalu "ada", tapi tingginya 0 sehingga tidak terlihat */
+        max-height: 0;
+        /* tinggi 0 = tersembunyi */
+        overflow: hidden;
+        /* isi yang melebihi tinggi dipotong */
+        transition: max-height .35s ease;
+        /* perubahan tinggi dianimasikan */
+    }
+    .menu.open {
+        max-height: 400px      /* saat class "open" ada, tinggi naik sehingga menu terlihat */
+    }
+}
+
+/* HERO: SATU FOTO BESAR SEBAGAI LATAR BERANDA */
+.hero {
+     height: 70vh;
+    /* tinggi = 70% tinggi layar */
+    min-height: 320px;
+    display: flex;
+    /* untuk menaruh tulisan di tengah */
+    align-items: center;
+    /* tengah secara vertikal */
+    justify-content: center;
+    /* tengah secara horizontal */
+    background-image:
+        linear-gradient(rgba(11, 45, 198, .35), rgba(0, 0, 0, .55)),
+        /* lapisan 1: bayangan agar tulisan terbaca */
+        url("images.jpg"),
+        /* lapisan 2: fotomu */
+        linear-gradient(135deg, #1e5fd8, #0b2dc6);
+    /* lapisan 3: warna cadangan */
+    background-size: cover;
+     /* foto menutupi seluruh area tanpa gepeng */
+    background-position: center;
+    /* bagian tengah foto yang ditampilkan */
+}
+/* TULISAN DI ATAS FOTO */
+.caption{
+    color:#fff;
+    text-align:left;
+    padding: 0 27%;
+    text-shadow: 0 1px 8px rgba(0, 0, 0,.4);
+}
+.caption h2{
+    font-size: clamp(30px,5.5vw,100px);
+    margin-bottom: 10px;
+}
+.caption p {
+    font-size: clamp(10px, 1vw, 20px);
+}
+
+/* SLIDE KEUNGGULAN */
+.kg{
+    padding: 50px 5%;
+    background: #5c805b;
+    scroll-margin-top: 70px;
+}
+
+/* ISI UTAMA */
+.kg h2{
+    font-size:calc(24px,3.5vw,34px) ;
+    color: #fff;
+    margin-bottom: 30px;
+}
+.kg p{
+    line-height: 1,7;
+    font-weight: normal;
+    font-size: 18;
+    margin: 20px 0 10px;
+}
+/* ----- Tampilan HP tinggi foto dikecilkan ----- */
+@media (max-width: 768px) {
+    .vs-foto {
+        height: 220px
+    }
+}
+
+/* SLIDE HALAMAN DEATINASI */
+.wib{
+    padding: 50px;
+    background: #fff;
+    scroll-snap-stop: 70px;
+}
+.wib h2{
+    font-size: calc(24px,3.5vw,34px);
+    color: #000;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* SUSUNAN KARTU WISATA */
+.wib-daftar{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20 px;
+}
+.wib-kartu{
+     background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    /* sudut foto ikut melengkung mengikuti kartu */
+    box-shadow: 0 4px 14px rgba(11, 45, 198, .12);
+    transition: transform .3s, box-shadow .3s;
+    /* perubahan dibuat halus */
+}
+.wib-kartu:hover{
+     transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(11, 45, 198, .22);
+}
+.wib-foto{
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* BAGIAN FOTO TIAP WISATA */
+
+
+
+
+
+
+
+
+
+
+
+
+.wib-isi{
+    padding: 18px;
+}
+.wib-isi h4{
+     font-size: 17px;
+    color: #000;
+    margin-bottom: 8px
+}
+.wib-isi p{
+     font-size: 14px;
+    line-height: 1.6;
+    color: #2b3a4f
+}
